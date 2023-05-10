@@ -1,14 +1,29 @@
 import React from "react";
 import { Button } from "@ui-kitten/components";
-import { StyleSheet, View, ViewProps } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { DoneIcon, TrashIcon } from "../IconsCompoents";
 
-const TaskComponentFooter = (): React.ReactElement => (
+const TaskComponentFooter = ({
+  status,
+}: {
+  status: string;
+}): React.ReactElement => (
   <View style={[styles.footerContainer]}>
-    <Button style={styles.footerControl} size="small" status="basic">
-      CANCEL
+    <Button
+      style={styles.footerControl}
+      size="small"
+      status="basic"
+      accessoryRight={TrashIcon}
+    >
+      DELETE
     </Button>
-    <Button style={styles.footerControl} size="small">
-      ACCEPT
+    <Button
+      style={styles.footerControl}
+      size="small"
+      accessoryRight={DoneIcon}
+      disabled={status === "complete" ? true : false}
+    >
+      DONE
     </Button>
   </View>
 );

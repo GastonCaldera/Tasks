@@ -7,14 +7,15 @@ import TaskComponentFooter from "../TaskComponentFooter";
 const TaskComponent = ({ tasks }): React.ReactElement => {
   return (
     <ScrollView>
-      {tasks.map((task) => {
+      {tasks.map((task, index) => {
         return (
           <Card
+            key={index}
             style={styles.card}
             header={
               <TaskComponentHeader title={"Description"} status={task.status} />
             }
-            footer={<TaskComponentFooter />}
+            footer={<TaskComponentFooter status={task.status} />}
           >
             <Text>{task.description}</Text>
           </Card>

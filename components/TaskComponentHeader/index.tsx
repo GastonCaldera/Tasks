@@ -9,7 +9,12 @@ const TaskComponentHeader = ({
 }: TaskComponentHeaderType): React.ReactElement => (
   <View style={styles.view}>
     <Text category="h6">{title}</Text>
-    <Text category="s1">{status}</Text>
+    <Text
+      category="s1"
+      style={{ color: status === "complete" ? "#00E71C" : "#003AFF" }}
+    >
+      {status}
+    </Text>
   </View>
 );
 

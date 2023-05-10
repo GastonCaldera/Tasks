@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Layout, Text, ViewPager } from "@ui-kitten/components";
+import { Layout, ViewPager } from "@ui-kitten/components";
 import BottomTabs from "../components/BottomTabs";
 import TaskComponent from "../components/TaskComponent";
 import jsontTasks from "../data/task.json";
@@ -19,10 +19,14 @@ const Dashboard = (): React.ReactElement => {
           <TaskComponent tasks={tasks} />
         </Layout>
         <Layout style={styles.tab} level="2">
-          <Text category="h5">To Do</Text>
+          <TaskComponent
+            tasks={tasks.filter((element) => element.status === "pending")}
+          />
         </Layout>
         <Layout style={styles.tab} level="2">
-          <Text category="h5">completed</Text>
+          <TaskComponent
+            tasks={tasks.filter((element) => element.status === "complete")}
+          />
         </Layout>
       </ViewPager>
       <BottomTabs
