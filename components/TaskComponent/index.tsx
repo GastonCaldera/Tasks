@@ -8,6 +8,7 @@ const TaskComponent = ({
   tasks,
   handleDelete,
   handleDone,
+  setIsloading,
 }): React.ReactElement => {
   return (
     <ScrollView>
@@ -24,7 +25,8 @@ const TaskComponent = ({
                 id={task.id}
                 status={task.status}
                 handleDelete={(id) => handleDelete(id)}
-                handleDone={(id) => handleDone(id)}
+                handleDone={(id, status) => handleDone(id, status)}
+                setIsloading={setIsloading}
               />
             }
           >

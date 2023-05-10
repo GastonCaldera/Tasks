@@ -12,8 +12,8 @@ const BottomTabs = ({
       onSelect={(index) => setSelectedIndex(index)}
     >
       <BottomNavigationTab title="All" />
-      <BottomNavigationTab title="To Do" />
       <BottomNavigationTab title="completed" />
+      <BottomNavigationTab title="To Do" />
     </BottomNavigation>
   );
 };

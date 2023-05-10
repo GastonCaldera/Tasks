@@ -1,15 +1,15 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import Dashboard from "../containers";
 
-const { Navigator, Screen } = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const AppNavigator = () => (
   <NavigationContainer>
-    <Navigator tabBar={(props) => null}>
-      <Screen name="Dashboard" component={Dashboard} />
-    </Navigator>
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen name="Home" component={Dashboard} />
+    </Drawer.Navigator>
   </NavigationContainer>
 );
 

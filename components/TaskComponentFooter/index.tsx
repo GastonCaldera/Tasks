@@ -9,18 +9,9 @@ const TaskComponentFooter = ({
   status,
   handleDelete,
   handleDone,
+  setIsloading,
 }: TaskFooterType): React.ReactElement => {
   const [visible, setVisible] = useState<boolean>(false);
-  const [disabled, setDisabled] = useState<boolean>(
-    status === "complete" ? true : false
-  );
-  const [isLoadingDone, setIsloadingDone] = useState<boolean>(false);
-  const [isLoadingDelete, setIsloadingDelete] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsloadingDone(false);
-    setIsloadingDelete(false);
-  }, [status]);
   return (
     <View style={[styles.footerContainer]}>
       <Button
@@ -30,32 +21,18 @@ const TaskComponentFooter = ({
         accessoryRight={TrashIcon}
         onPress={() => setVisible(true)}
       >
-        {isLoadingDelete ? (
-          <View>
-            <Spinner size="small" />
-          </View>
-        ) : (
-          "DELETE"
-        )}
+        DELETE
       </Button>
       <Button
         style={styles.footerControl}
         size="small"
         accessoryRight={DoneIcon}
-        disabled={disabled}
         onPress={() => {
-          setDisabled(true);
-          setIsloadingDone(true);
-          handleDone(id);
+          handleDone(id, status);
+          setIsloading();
         }}
       >
-        {isLoadingDone ? (
-          <View>
-            <Spinner size="small" />
-          </View>
-        ) : (
-          "DONE"
-        )}
+        {status === "complete" ? "TO DO" : "DONE"}
       </Button>
       <Modal backdropStyle={styles.backdrop} visible={visible}>
         <Card disabled={true}>
@@ -64,9 +41,9 @@ const TaskComponentFooter = ({
           </Text>
           <Button
             onPress={() => {
-              setIsloadingDelete(true);
               setVisible(false);
               handleDelete(id);
+              setIsloading();
             }}
           >
             ACCEPT
