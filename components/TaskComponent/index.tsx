@@ -4,7 +4,11 @@ import { StyleSheet, ScrollView } from "react-native";
 import TaskComponentHeader from "../TaskComponentHeader";
 import TaskComponentFooter from "../TaskComponentFooter";
 
-const TaskComponent = ({ tasks }): React.ReactElement => {
+const TaskComponent = ({
+  tasks,
+  handleDelete,
+  handleDone,
+}): React.ReactElement => {
   return (
     <ScrollView>
       {tasks.map((task, index) => {
@@ -15,7 +19,14 @@ const TaskComponent = ({ tasks }): React.ReactElement => {
             header={
               <TaskComponentHeader title={"Description"} status={task.status} />
             }
-            footer={<TaskComponentFooter status={task.status} />}
+            footer={
+              <TaskComponentFooter
+                id={task.id}
+                status={task.status}
+                handleDelete={(id) => handleDelete(id)}
+                handleDone={(id) => handleDone(id)}
+              />
+            }
           >
             <Text>{task.description}</Text>
           </Card>
