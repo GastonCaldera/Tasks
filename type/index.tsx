@@ -1,2 +1,2 @@
-export * from './BottomNavigationType'
-export * from './TaskHeaderType'
+export * from "./BottomNavigationType";
+export * from "./TaskHeaderType";

@@ -5,13 +5,12 @@ import Dashboard from "../containers";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
-
 const AppNavigator = () => (
-    <NavigationContainer>
-        <Navigator tabBar={(props) => null}>
-            <Screen name="Dashboard" component={Dashboard} />
-        </Navigator>
-    </NavigationContainer>
+  <NavigationContainer>
+    <Navigator tabBar={(props) => null}>
+      <Screen name="Dashboard" component={Dashboard} />
+    </Navigator>
+  </NavigationContainer>
 );
 
 export default AppNavigator;

@@ -1,4 +1,4 @@
 export interface TaskComponentHeaderType {
-    title: string,
-    status: string
+  title: string;
+  status: string;
 }
