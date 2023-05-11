@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView, View } from "react-native";
 import { Layout, ViewPager, Spinner } from "@ui-kitten/components";
-import BottomTabs from "../components/BottomTabs";
-import TaskComponent from "../components/TaskComponent";
-import jsontTasks from "../data/task.json";
-import { sleep } from "../utils/function";
+import BottomTabs from "../../components/BottomTabs";
+import TaskComponent from "../../components/TaskComponent";
+import jsontTasks from "../../data/task.json";
+import { sleep } from "../../utils/function";
 
-const Dashboard = (): React.ReactElement => {
+const Home = (): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [tasks, setTasks] = useState(jsontTasks);
   const [pendingTasks, setPendingTasks] = useState([]);
@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dashboard;
+export default Home;
