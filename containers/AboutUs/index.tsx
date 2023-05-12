@@ -7,7 +7,7 @@ const AboutUs = (): React.ReactElement => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text>This App is Powered by Expo and Ui kitten 😻</Text>
+        <Text>This App works with Expo and Kitty Ui 😻</Text>
       </View>
     </SafeAreaView>
   );
