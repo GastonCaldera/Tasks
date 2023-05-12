@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
 import { Text } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
 import { TaskComponentHeaderType } from "../../type";
@@ -27,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskComponentHeader;
+export default observer(TaskComponentHeader);

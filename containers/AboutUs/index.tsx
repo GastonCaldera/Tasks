@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView, View } from "react-native";
+import { observer } from "mobx-react-lite";
 import { Text } from "@ui-kitten/components";
 
 const AboutUs = (): React.ReactElement => {
@@ -23,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AboutUs;
+export default observer(AboutUs);

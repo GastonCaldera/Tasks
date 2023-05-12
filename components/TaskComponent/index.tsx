@@ -1,8 +1,10 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
 import { Text, Card } from "@ui-kitten/components";
 import { StyleSheet, ScrollView } from "react-native";
 import TaskComponentHeader from "../TaskComponentHeader";
 import TaskComponentFooter from "../TaskComponentFooter";
+import { TaskType } from "../../type";
 
 const TaskComponent = ({
   tasks,
@@ -12,9 +14,10 @@ const TaskComponent = ({
 }): React.ReactElement => {
   return (
     <ScrollView>
-      {tasks.map((task, index) => {
+      {tasks?.map((task: TaskType, index: number) => {
         return (
           <Card
+            disabled={true}
             key={index}
             style={styles.card}
             header={
@@ -57,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskComponent;
+export default observer(TaskComponent);

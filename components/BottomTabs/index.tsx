@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
 import { BottomNavigationTab, BottomNavigation } from "@ui-kitten/components";
 import { BottomNavigationType } from "../../type";
 
@@ -18,4 +19,4 @@ const BottomTabs = ({
   );
 };
 
-export default BottomTabs;
+export default observer(BottomTabs);

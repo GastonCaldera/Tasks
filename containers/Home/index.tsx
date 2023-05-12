@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { observer } from "mobx-react-lite";
 import { StyleSheet, SafeAreaView, View } from "react-native";
-import { Layout, ViewPager, Spinner } from "@ui-kitten/components";
+import { Layout, ViewPager, Spinner, Button } from "@ui-kitten/components";
 import BottomTabs from "../../components/BottomTabs";
 import TaskComponent from "../../components/TaskComponent";
-import jsontTasks from "../../data/task.json";
-import { sleep } from "../../utils/function";
+import { sleep, getStoreData } from "../../utils/function";
+import ModalAdd from "../../components/ModalAdd";
+import { TaskType } from "../../type";
 
 const Home = (): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [tasks, setTasks] = useState(jsontTasks);
-  const [pendingTasks, setPendingTasks] = useState([]);
-  const [completeTasks, setCompleteTasks] = useState([]);
-  const [isLoading, setIsloading] = useState(false);
+  const [tasks, setTasks] = useState([]);
+  const [isLoading, setIsloading] = useState<boolean>(false);
+  const [visible, setVisible] = useState<boolean>(false);
 
-  const handleDelete = (id) => {
-    const newState = tasks.filter((element) => element.id !== id);
+  const handleDelete = (id: number) => {
+    const newState = tasks.filter((element: TaskType) => element.id !== id);
     sleep(500).then(() => {
       setTasks(newState);
       setIsloading(false);
     });
   };
 
-  const handleDone = (id, status) => {
-    const newState = tasks.map((element) => {
+  const handleDone = (id: number, status: string) => {
+    const newState = tasks.map((element: TaskType) => {
       if (element.id === id) {
         return {
           ...element,
@@ -37,10 +38,28 @@ const Home = (): React.ReactElement => {
     });
   };
 
+  const handleCreate = (description: string) => {
+    const newState = tasks;
+    newState.push({
+      id: tasks.length,
+      status: "pending",
+      description,
+    });
+    setIsloading(true);
+    setVisible(false);
+    sleep(500).then(() => {
+      setTasks(newState);
+      setIsloading(false);
+    });
+  };
+
   useEffect(() => {
-    setPendingTasks(tasks.filter((element) => element.status === "pending"));
-    setCompleteTasks(tasks.filter((element) => element.status === "complete"));
-  }, [tasks]);
+    setIsloading(true);
+    getStoreData("tasks").then((data) => {
+      setTasks(data);
+      setIsloading(false);
+    });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,59 +70,86 @@ const Home = (): React.ReactElement => {
           <Spinner size={"galactic"} />
         </View>
       ) : (
-        <ViewPager
-          selectedIndex={selectedIndex}
-          onSelect={(index) => setSelectedIndex(index)}
-          style={styles.tab}
-          swipeEnabled={false}
-        >
-          <Layout style={styles.tab} level="2">
-            <TaskComponent
-              tasks={tasks}
-              handleDelete={(id) => {
-                handleDelete(id);
-              }}
-              handleDone={(id, status) => {
-                handleDone(id, status);
-              }}
-              setIsloading={() => {
-                setIsloading(true);
-              }}
-            />
-          </Layout>
-          <Layout style={styles.tab} level="2">
-            <TaskComponent
-              tasks={completeTasks}
-              handleDelete={(id) => {
-                handleDelete(id);
-              }}
-              handleDone={(id, status) => {
-                handleDone(id, status);
-              }}
-              setIsloading={() => {
-                setIsloading(true);
-              }}
-            />
-          </Layout>
-          <Layout style={styles.tab} level="2">
-            <TaskComponent
-              tasks={pendingTasks}
-              handleDelete={(id) => {
-                handleDelete(id);
-              }}
-              handleDone={(id, status) => {
-                handleDone(id, status);
-              }}
-              setIsloading={() => {
-                setIsloading(true);
-              }}
-            />
-          </Layout>
-        </ViewPager>
+        <>
+          <View
+            style={{
+              position: "absolute",
+              zIndex: 999,
+              top: 0,
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              width: "100%",
+            }}
+          >
+            <Button
+              size="small"
+              style={{ width: 70, marginRight: 10 }}
+              onPress={() => setVisible(true)}
+            >
+              ADD
+            </Button>
+          </View>
+          <ViewPager
+            selectedIndex={selectedIndex}
+            onSelect={(index) => setSelectedIndex(index)}
+            style={styles.tab}
+            swipeEnabled={false}
+          >
+            <Layout style={styles.tab} level="2">
+              <TaskComponent
+                tasks={tasks}
+                handleDelete={(id: number) => {
+                  handleDelete(id);
+                }}
+                handleDone={(id: number, status: string) => {
+                  handleDone(id, status);
+                }}
+                setIsloading={() => {
+                  setIsloading(true);
+                }}
+              />
+            </Layout>
+            <Layout style={styles.tab} level="2">
+              <TaskComponent
+                tasks={tasks.filter((element) => element.status === "complete")}
+                handleDelete={(id: number) => {
+                  handleDelete(id);
+                }}
+                handleDone={(id: number, status: string) => {
+                  handleDone(id, status);
+                }}
+                setIsloading={() => {
+                  setIsloading(true);
+                }}
+              />
+            </Layout>
+            <Layout style={styles.tab} level="2">
+              <TaskComponent
+                tasks={tasks.filter((element) => element.status === "pending")}
+                handleDelete={(id: number) => {
+                  handleDelete(id);
+                }}
+                handleDone={(id: number, status: string) => {
+                  handleDone(id, status);
+                }}
+                setIsloading={() => {
+                  setIsloading(true);
+                }}
+              />
+            </Layout>
+          </ViewPager>
+        </>
       )}
       <BottomTabs
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
+      />
+      <ModalAdd
+        visible={visible}
+        setVisible={setVisible}
+        handleAdd={(event) => {
+          handleCreate(event);
+        }}
       />
     </SafeAreaView>
   );
@@ -118,4 +164,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default observer(Home);

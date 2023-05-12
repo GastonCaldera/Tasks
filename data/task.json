@@ -23,45 +23,5 @@
     "id": 5,
     "description": "clean the bathroom",
     "status": "pending"
-  },
-  {
-    "id": 6,
-    "description": "take the dog out",
-    "status": "pending"
-  },
-  {
-    "id": 7,
-    "description": "do the laundry",
-    "status": "complete"
-  },
-  {
-    "id": 8,
-    "description": "do the shopping",
-    "status": "complete"
-  },
-  {
-    "id": 9,
-    "description": "do the homework",
-    "status": "pending"
-  },
-  {
-    "id": 10,
-    "description": "sweep the room",
-    "status": "pending"
-  },
-  {
-    "id": 11,
-    "description": "clean the kitchen",
-    "status": "complete"
-  },
-  {
-    "id": 12,
-    "description": "fold the sheets",
-    "status": "complete"
-  },
-  {
-    "id": 13,
-    "description": "buy ice cream",
-    "status": "pending"
   }
 ]

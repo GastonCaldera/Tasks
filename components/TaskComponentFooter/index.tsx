@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Button, Modal, Text, Card, Spinner } from "@ui-kitten/components";
+import React, { useState } from "react";
+import { observer } from "mobx-react-lite";
+import { Button, Modal, Text, Card } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
-import { DoneIcon, TrashIcon } from "../IconsCompoents";
+// import { DoneIcon, TrashIcon } from "../IconsCompoents";
 import { TaskFooterType } from "../../type";
 
 const TaskComponentFooter = ({
@@ -18,7 +19,7 @@ const TaskComponentFooter = ({
         style={styles.footerControl}
         size="small"
         status="basic"
-        accessoryRight={TrashIcon}
+        // accessoryRight={TrashIcon}
         onPress={() => setVisible(true)}
       >
         DELETE
@@ -26,7 +27,7 @@ const TaskComponentFooter = ({
       <Button
         style={styles.footerControl}
         size="small"
-        accessoryRight={DoneIcon}
+        // accessoryRight={DoneIcon}
         onPress={() => {
           handleDone(id, status);
           setIsloading();
@@ -34,7 +35,11 @@ const TaskComponentFooter = ({
       >
         {status === "complete" ? "TO DO" : "DONE"}
       </Button>
-      <Modal backdropStyle={styles.backdrop} visible={visible}>
+      <Modal
+        backdropStyle={styles.backdrop}
+        visible={visible}
+        onBackdropPress={() => setVisible(false)}
+      >
         <Card disabled={true}>
           <Text style={{ paddingVertical: 20 }}>
             Are you sure you want to delete this task?
@@ -68,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskComponentFooter;
+export default observer(TaskComponentFooter);
