@@ -9,12 +9,12 @@ npm install
 # or 
 yarn install
 ```
-For run server.
+For run App.
 ```bash
 npm run start
 # or 
-npm run start:dev
+npx expo start
 ```
 
 ## Usage
-This app is simple, just add your tasks and follow them, you can see filter your tasks with the buttons in the footer "All", "Complete" and "To do"
+This app is simple, just add your tasks and follow them, you can see filter your tasks with the buttons in the footer "All", "Complete" and "To do".
