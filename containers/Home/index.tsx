@@ -10,7 +10,7 @@ import { TaskType } from "../../type";
 
 const Home = (): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -111,7 +111,9 @@ const Home = (): React.ReactElement => {
             </Layout>
             <Layout style={styles.tab} level="2">
               <TaskComponent
-                tasks={tasks.filter((element) => element.status === "complete")}
+                tasks={tasks.filter(
+                  (element: TaskType) => element.status === "complete"
+                )}
                 handleDelete={(id: number) => {
                   handleDelete(id);
                 }}
@@ -125,7 +127,9 @@ const Home = (): React.ReactElement => {
             </Layout>
             <Layout style={styles.tab} level="2">
               <TaskComponent
-                tasks={tasks.filter((element) => element.status === "pending")}
+                tasks={tasks.filter(
+                  (element: TaskType) => element.status === "pending"
+                )}
                 handleDelete={(id: number) => {
                   handleDelete(id);
                 }}
@@ -147,7 +151,7 @@ const Home = (): React.ReactElement => {
       <ModalAdd
         visible={visible}
         setVisible={setVisible}
-        handleAdd={(event) => {
+        handleAdd={(event: string) => {
           handleCreate(event);
         }}
       />

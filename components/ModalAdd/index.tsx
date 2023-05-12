@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Button, Modal, Text, Card, Input } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
+import { ModalAddType } from "../../type";
 
-const ModalAdd = ({ visible, setVisible, handleAdd }): React.ReactElement => {
+const ModalAdd = ({
+  visible,
+  setVisible,
+  handleAdd,
+}: ModalAddType): React.ReactElement => {
   const [value, setValue] = useState("");
   return (
     <Modal

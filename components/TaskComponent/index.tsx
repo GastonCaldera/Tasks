@@ -4,14 +4,14 @@ import { Text, Card } from "@ui-kitten/components";
 import { StyleSheet, ScrollView } from "react-native";
 import TaskComponentHeader from "../TaskComponentHeader";
 import TaskComponentFooter from "../TaskComponentFooter";
-import { TaskType } from "../../type";
+import { TaskType, TaskComponetType } from "../../type";
 
 const TaskComponent = ({
   tasks,
   handleDelete,
   handleDone,
   setIsloading,
-}): React.ReactElement => {
+}: TaskComponetType): React.ReactElement => {
   return (
     <ScrollView>
       {tasks?.map((task: TaskType, index: number) => {
@@ -29,7 +29,7 @@ const TaskComponent = ({
                 status={task.status}
                 handleDelete={(id) => handleDelete(id)}
                 handleDone={(id, status) => handleDone(id, status)}
-                setIsloading={setIsloading}
+                setIsloading={(event: boolean) => setIsloading(event)}
               />
             }
           >

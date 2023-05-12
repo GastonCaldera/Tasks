@@ -19,7 +19,6 @@ const TaskComponentFooter = ({
         style={styles.footerControl}
         size="small"
         status="basic"
-        // accessoryRight={TrashIcon}
         onPress={() => setVisible(true)}
       >
         DELETE
@@ -27,10 +26,9 @@ const TaskComponentFooter = ({
       <Button
         style={styles.footerControl}
         size="small"
-        // accessoryRight={DoneIcon}
         onPress={() => {
           handleDone(id, status);
-          setIsloading();
+          setIsloading(true);
         }}
       >
         {status === "complete" ? "TO DO" : "DONE"}
@@ -48,7 +46,7 @@ const TaskComponentFooter = ({
             onPress={() => {
               setVisible(false);
               handleDelete(id);
-              setIsloading();
+              setIsloading(true);
             }}
           >
             ACCEPT
